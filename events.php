@@ -20,7 +20,19 @@ function tpr_map() {
 }
 
 function tpr_event_list() {
+	 ?>
+	<ul class="event-list">
+		<li class="event-item"></li>
+	</ul>
+	<?php
+}
 
+function tpr_event_details() {
+	 ?>
+	<ul class="event-list">
+		<li class="event-item"></li>
+	</ul>
+	<?php
 }
 
 /**

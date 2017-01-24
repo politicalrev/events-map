@@ -9,6 +9,7 @@ Makes a map with events from custom post type
 
 == To Do ==
 
+* Test the new post type in the REST endpoint
 * Google Maps API Key registration somewhere. Maybe more options.
 * Actually code the front end
 * Save from front end (public) might be best with forms. Security etc.
@@ -19,3 +20,4 @@ Makes a map with events from custom post type
 * Probably gonna want some design stuff
 * Form validation email/phone website
 * Integrate other prog events
+* Maybe add image field with fallback Bernie/Prog images
