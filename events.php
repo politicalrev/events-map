@@ -13,11 +13,17 @@
  */
 defined( 'ABSPATH' ) or die( "I'm sure we'd be friends AFK." );
 
+/**
+ * Define directory
+ */
+define( 'PLUGIN_DIR', dirname(__FILE__).'/' );
+
 
 /**
  * Include the Admin Functionality
  */
-include plugin_dir_path('events-admin.php');
+
+include( PLUGIN_DIR . 'events-admin.php');
 
 
 
@@ -30,7 +36,7 @@ function tpr_map() {
 	<?php
 }
 
-function tpr_map(inputMarkup) {
+function tpr_event_search() {
 	?>
 	<div class="event-map-input-wrap">
 		<!-- If inpit, then test and insert here otherwise default -->
