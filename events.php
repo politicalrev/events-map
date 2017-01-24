@@ -13,6 +13,17 @@
  */
 defined( 'ABSPATH' ) or die( "I'm sure we'd be friends AFK." );
 
+
+/**
+ * Include the Admin Functionality
+ */
+include plugin_dir_path('events-admin.php');
+
+
+
+/**
+ * Define Components as Template Tags
+ */
 function tpr_map() {
 	?>
 	<div class="event-map"></div>
