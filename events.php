@@ -24,6 +24,7 @@ define( 'PLUGIN_DIR', dirname(__FILE__).'/' );
  */
 
 include( PLUGIN_DIR . 'events-admin.php');
+include( PLUGIN_DIR . 'events-options.php');
 
 
 
