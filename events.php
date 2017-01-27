@@ -33,7 +33,7 @@ include( PLUGIN_DIR . 'events-options.php');
  */
 function tpr_map() {
 	?>
-	<div class="event-map"></div>
+	<div class="event-map">yoooooooooo</div>
 	<?php
 }
 

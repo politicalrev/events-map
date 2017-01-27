@@ -35,7 +35,7 @@ function tpr_create_events_posttype() {
        	)
     );
 }
-add_action('init', 'tpr_create_events_posttype');
+add_action('init', 'tpr_create_events_posttype', 11);
 
 
 

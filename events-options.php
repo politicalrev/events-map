@@ -4,31 +4,20 @@
  * Recommended Threat Prevention Snippet
  */
 defined( 'ABSPATH' ) or die( "I'm sure we'd be friends AFK." );
-?>
 
-
-
-<?php
 function tpr_options_page_html() {
     // check user capabilities
     if (!current_user_can('manage_options')) { return; }
 
-    ?>
-    <div class="wrap">
+    echo '<div class="wrap">
         <h1><?= esc_html(get_admin_page_title()); ?></h1>
-        <form action="options.php" method="post">
-            <?php
-            // output security fields for the registered setting "tpr_options"
+                <form action="options.php" method="post">'
             settings_fields('tpr_options');
-            // output setting sections and their fields
-            // (sections are registered for "tpr", each field is registered to a specific section)
             do_settings_sections('tpr');
-            // output save settings button
             submit_button('Save Settings');
-            ?>
-        </form>
-    </div>
-    <?php
+
+        echo '</form>
+    </div>'
 }
 
 function tpr_options_page() {
