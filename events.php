@@ -22,48 +22,20 @@ define( 'PLUGIN_DIR', dirname(__FILE__).'/' );
 /**
  * Include the Admin Functionality
  */
-
-include( PLUGIN_DIR . 'events-admin.php');
+include( PLUGIN_DIR . 'events-define-post-type.php');
+include( PLUGIN_DIR . 'events-meta-box.php');
 include( PLUGIN_DIR . 'events-options.php');
 
 
-
 /**
- * Define Components as Template Tags
+ * Include Components
  */
-function tpr_map() {
-	?>
-	<div class="event-map">yoooooooooo</div>
-	<?php
-}
-
-function tpr_event_search() {
-	?>
-	<div class="event-map-input-wrap">
-		<!-- If inpit, then test and insert here otherwise default -->
-	</div>
-	<?php
-}
-
-// Gonna need to think about the best way to do this
-function tpr_event_list() {
-	 ?>
-	<ul class="event-list">
-		<li class="event-item"></li>
-	</ul>
-	<?php
-}
+include( PLUGIN_DIR . '/components/events-list.php');
+include( PLUGIN_DIR . '/components/events-map.php');
+include( PLUGIN_DIR . '/components/events-search-input.php');
+include( PLUGIN_DIR . '/components/events-single-content.php');
 
 
-function tpr_event_details() {
-	 ?>
-	 <div class="event-details">
-		<ul class="deails-list">
-			<li class="event-details-item"></li>
-		</ul>
-	 </div>
-	<?php
-}
 
 /**
  * Enqueue scripts and styles.
