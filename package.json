@@ -1,0 +1,20 @@
+{
+  "name": "events-map",
+  "version": "0.1.1",
+  "description": "Events Plugin for The Political Revolution",
+  "main": "index.js",
+  "repository": "https://github.com/leggomuhgreggo/events-map",
+  "author": "Greg Westneat <greg@fosterwebmarketing.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "rimraf": "^2.5.4",
+    "webpack": "2.2.0"
+  },
+  "scripts": {
+    "build": "rimraf dist && webpack -p",
+    "watch": "webpack watch"
+  }
+}
