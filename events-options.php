@@ -11,14 +11,13 @@ function tpr_options_page_html() {
 
     echo '<div class="wrap">
         <h1><?= esc_html(get_admin_page_title()); ?></h1>
-                <form action="options.php" method="post">'
-            settings_fields('tpr_options');
-            do_settings_sections('tpr');
-            submit_button('Save Settings');
-
+                <form action="options.php" method="post">';
+ // settings_fields('tpr_options');
+            // do_settings_sections('tpr');
+            // submit_button('Save Settings');
         echo '</form>
-    </div>'
-}
+    </div>';
+};
 
 function tpr_options_page() {
     add_submenu_page(
@@ -29,7 +28,7 @@ function tpr_options_page() {
         'event_options',
         'tpr_options_page_html'
     );
-}
+};
 add_action('admin_menu', 'tpr_options_page');
 
 
@@ -40,15 +39,10 @@ function tpr_settings_init () {
 	    'settings_section_cb', 
 	    'Events Options'
 	);
-}
+};
 add_action('admin_init', 'tpr_settings_init');
 
 function wporg_settings_section_cb() {
     echo '<p>Section Introduction.</p>';
-}
-
-
-
-
-?>
+};
 
