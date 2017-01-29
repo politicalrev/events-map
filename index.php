@@ -41,7 +41,7 @@ include( PLUGIN_DIR . 'components/index.php');
  * Enqueue Scripts
  */
 function tpr_add_events_scripts() {
-	wp_register_script('events', plugins_url('/assets/events.js', __FILE__), array( 'wp-api', 'jquery' ), true);
+	wp_register_script('events', plugins_url('/assets/events.js', __FILE__), array( 'wp-api', 'jquery' ), '', true);
 	wp_enqueue_script('events');
 }
 add_action( 'wp_enqueue_scripts', 'tpr_add_events_scripts' ); 
