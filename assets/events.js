@@ -68,39 +68,33 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_google_maps__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_google_maps__);
 
 
-var loadMaps = new Promise(function (resolve, reject) {
-	__WEBPACK_IMPORTED_MODULE_0_google_maps___default.a.KEY = 'AIzaSyD7Fem2tboGL7mit0d7qWOiYW7bdfB8bLc';
-	__WEBPACK_IMPORTED_MODULE_0_google_maps___default.a.load(function (google) {
+var _googleMaps = __webpack_require__(1);
+
+var _googleMaps2 = _interopRequireDefault(_googleMaps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+window.__TPR = {};
+var TPR_EVENTS = window.__TPR.events = {};
+
+var loadMapsAPI = new Promise(function (resolve, reject) {
+	_googleMaps2.default.KEY = 'AIzaSyD7Fem2tboGL7mit0d7qWOiYW7bdfB8bLc';
+	_googleMaps2.default.load(function (google) {
 		return resolve(google);
 	});
 });
 
-var updateBounds = function updateBounds(bounds, locArr) {
-
-	for (var latLng in locArr) {
-		console.log(locArr[latLng]);
-		bounds.extend(locArr[latLng]);
-	}
-};
-
 var initMap = function initMap(google) {
 
 	var mapEl = document.createElement('div');
-	var listTarget = document.getElementsByClassName('event-list')[0];
-	var OPTIONS = {
-		scrollwheel: false
-	};
-	var initialLatLngs = [{ lat: 49.38, lng: -66.94 }, { lat: 25.82, lng: -124.39 }];
+	var OPTIONS = { scrollwheel: false };
 
-	var map = new google.maps.Map(mapEl, OPTIONS);
-	var bounds = new google.maps.LatLngBounds();
+	var US = [{ lat: 49.38, long: -66.94 }, { lat: 25.82, long: -124.39 }];
 
 	mapEl.id = 'events-map';
 	mapEl.style.width = '100%';
@@ -108,14 +102,109 @@ var initMap = function initMap(google) {
 
 	document.getElementById('tpr-events-map-wrapper').appendChild(mapEl);
 
-	updateBounds(bounds, initialLatLngs);
+	var map = new google.maps.Map(mapEl, OPTIONS);
+	var boundsObj = new google.maps.LatLngBounds();
 
-	map.fitBounds(bounds);
+	// for(let event of US){
+	// 	let latLng = new google.maps.LatLng(event.lat*1, event.long*1);
+
+	// 	let marker = new google.maps.Marker({
+	//      position: latLng,
+	//      title:"Hello World!",
+	//      visible: true,
+	//      map: map
+	//   });
+	// }
+
+
+	setMapState(map, boundsObj, US);
 };
 
-loadMaps.then(function (google) {
+var setMapState = async function setMapState(map, boundsObj, events) {
+	var latLngArray = [];
+
+	var _iteratorNormalCompletion = true;
+	var _didIteratorError = false;
+	var _iteratorError = undefined;
+
+	try {
+		for (var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+			var event = _step.value;
+
+			var latLng = new google.maps.LatLng(event.lat * 1, event.long * 1);
+
+			placeMarker(map, latLng);
+			boundsObj.extend(latLng);
+		}
+	} catch (err) {
+		_didIteratorError = true;
+		_iteratorError = err;
+	} finally {
+		try {
+			if (!_iteratorNormalCompletion && _iterator.return) {
+				_iterator.return();
+			}
+		} finally {
+			if (_didIteratorError) {
+				throw _iteratorError;
+			}
+		}
+	}
+
+	map.fitBounds(boundsObj);
+
+	// Promise.all(events.map( event => {
+	// 	let latLng = { lat: event.lat*1, lng: event.long*1 };
+
+	// 	boundsObj.extend(latLng);
+	// 	const jah = await placeMarker(map, latLng);
+
+	// })).then( () => {
+	// });
+};
+
+var updateBounds = function updateBounds(boundsObj, event) {};
+
+var placeMarker = function placeMarker(map, event) {
+	var latLng = new google.maps.LatLng(event.lat * 1, event.long * 1);
+
+	// return new Promise( resolve => {
+	var thisMap = map;
+	var marker = new google.maps.Marker({
+		position: latLng,
+		title: "Hello World!",
+		visible: true,
+		map: thisMap
+	});
+
+	marker.setMap(thisMap);
+
+	// console.log(map);
+
+
+	//  resolve();
+	// });
+};
+
+loadMapsAPI.then(function (google) {
 	return initMap(google);
 });
+
+///////TESTING////////////
+var MOCK_API_ENDPOINT = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/39469/MOCK_DATA.json';
+
+var asyncGet = new Promise(function (resolve, reject) {
+
+	$.get(MOCK_API_ENDPOINT, function (events) {
+
+		resolve();
+	});
+});
+
+asyncGet.then(function () {
+	setMapState;
+});
+///////TESTING////////////
 
 /***/ }),
 /* 1 */
@@ -348,15 +437,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_events_map_EventsMap_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_events_map_EventsMap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_events_map_EventsMap_js__);
 
 
-
+__webpack_require__(0);
 
 /*
 Load New Event Posts

@@ -1,6 +1,5 @@
 {
   "presets": [
-    ["es2015", {"modules": false}],
-  ],
-  "plugins": ["syntax-dynamic-import"]
+    ["es2015", "stage-0"]
+  ]
 }
