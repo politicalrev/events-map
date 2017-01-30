@@ -84,6 +84,7 @@ var TPR_EVENTS = window.__TPR.events = {};
 
 var loadMapsAPI = new Promise(function (resolve, reject) {
 	_googleMaps2.default.KEY = 'AIzaSyD7Fem2tboGL7mit0d7qWOiYW7bdfB8bLc';
+	console.log('loadMapsAPI');
 	_googleMaps2.default.load(function (google) {
 		return resolve(google);
 	});
@@ -105,6 +106,8 @@ var initMap = function initMap(google) {
 	var map = new google.maps.Map(mapEl, OPTIONS);
 	var boundsObj = new google.maps.LatLngBounds();
 
+	setMapState(map, boundsObj, US);
+
 	// for(let event of US){
 	// 	let latLng = new google.maps.LatLng(event.lat*1, event.long*1);
 
@@ -116,11 +119,9 @@ var initMap = function initMap(google) {
 	//   });
 	// }
 
-
-	setMapState(map, boundsObj, US);
 };
 
-var setMapState = async function setMapState(map, boundsObj, events) {
+var setMapState = function setMapState(map, boundsObj, events) {
 	var _iteratorNormalCompletion = true;
 	var _didIteratorError = false;
 	var _iteratorError = undefined;
@@ -130,11 +131,11 @@ var setMapState = async function setMapState(map, boundsObj, events) {
 		for (var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 			var event = _step.value;
 
+			// let latLng = [event.lat*1, event.long*1];
 			var latLng = new google.maps.LatLng(event.lat * 1, event.long * 1);
 
-			placeMarker(map, latLng);
-			// await placeMarker(map, latLng);
 			boundsObj.extend(latLng);
+			placeMarker(map, event);
 		}
 	} catch (err) {
 		_didIteratorError = true;
@@ -163,24 +164,17 @@ var setMapState = async function setMapState(map, boundsObj, events) {
 	// });
 };
 
-var updateBounds = function updateBounds(boundsObj, event) {};
-
 var placeMarker = function placeMarker(map, event) {
-	var latLng = new google.maps.LatLng(event.lat * 1, event.long * 1);
 
 	// return new Promise( resolve => {
-	var thisMap = map;
+
+	var latLng = new google.maps.LatLng(event.lat * 1, event.long * 1);
 	var marker = new google.maps.Marker({
 		position: latLng,
-		title: "Hello World!",
-		visible: true,
-		map: thisMap
+		map: map
 	});
 
-	marker.setMap(thisMap);
-
-	// console.log(map);
-
+	// marker.setMap(map);
 
 	//  resolve();
 	// });
@@ -191,19 +185,19 @@ loadMapsAPI.then(function (google) {
 });
 
 ///////TESTING////////////
-var MOCK_API_ENDPOINT = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/39469/MOCK_DATA.json';
+// const MOCK_API_ENDPOINT = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/39469/MOCK_DATA.json';
 
-var asyncGet = new Promise(function (resolve, reject) {
+// const asyncGet = new Promise( (resolve, reject) => {
 
-	$.get(MOCK_API_ENDPOINT, function (events) {
+//   $.get( MOCK_API_ENDPOINT, (events) => {
 
-		resolve();
-	});
-});
+// 		resolve();
+//   });  
+// });
 
-asyncGet.then(function () {
-	setMapState;
-});
+// asyncGet.then(function(){
+// 	setMapState
+// }) 
 ///////TESTING////////////
 
 /***/ }),

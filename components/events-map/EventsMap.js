@@ -4,7 +4,8 @@ window.__TPR = {};
 const TPR_EVENTS = window.__TPR.events = {}; 
 
 const loadMapsAPI = new Promise( (resolve, reject) => {
-	GoogleMapsLoader.KEY = 'AIzaSyD7Fem2tboGL7mit0d7qWOiYW7bdfB8bLc'
+	GoogleMapsLoader.KEY = 'AIzaSyD7Fem2tboGL7mit0d7qWOiYW7bdfB8bLc';
+	console.log('loadMapsAPI')
 	GoogleMapsLoader.load( google => resolve(google) );
 });
 
@@ -28,30 +29,33 @@ const initMap = (google) => {
   const map = new google.maps.Map(mapEl, OPTIONS);
   const boundsObj = new google.maps.LatLngBounds();
 
+  setMapState(map, boundsObj, US);
+  
+
 	// for(let event of US){
 	// 	let latLng = new google.maps.LatLng(event.lat*1, event.long*1);
 
 	// 	let marker = new google.maps.Marker({
- //      position: latLng,
- //      title:"Hello World!",
- //      visible: true,
- //      map: map
+	//      position: latLng,
+	//      title:"Hello World!",
+	//      visible: true,
+	//      map: map
 	//   });
 	// }
 
 
-  setMapState(map, boundsObj, US);
 
 };
 
-const setMapState = async (map, boundsObj, events) => {
+const setMapState = (map, boundsObj, events) => {
 
 	for(let event of events){
+		// let latLng = [event.lat*1, event.long*1];
 		let latLng = new google.maps.LatLng(event.lat*1, event.long*1);
 
-		placeMarker(map, latLng);
-		// await placeMarker(map, latLng);
 		boundsObj.extend(latLng);
+		placeMarker(map, event);
+		
 	}
 
 	map.fitBounds(boundsObj);
@@ -66,31 +70,17 @@ const setMapState = async (map, boundsObj, events) => {
 	// });
 }
 
-
-const updateBounds = (boundsObj, event) => {
-	
-
-	
-};
-
 const placeMarker = (map, event) => {
-	let latLng = new google.maps.LatLng(event.lat*1, event.long*1);
-
 
 	// return new Promise( resolve => {
-		let thisMap = map;
+
+		let latLng = new google.maps.LatLng(event.lat*1, event.long*1);		
 	  let marker = new google.maps.Marker({
       position: latLng,
-      title:"Hello World!",
-      visible: true,
-      map: thisMap
+      map: map
 	  });
 
-	  marker.setMap(thisMap);
-
-		// console.log(map);
-
-
+	  // marker.setMap(map);
 
 	 //  resolve();
   // });
@@ -103,18 +93,18 @@ const placeMarker = (map, event) => {
 loadMapsAPI.then( google => initMap(google) );
 
 ///////TESTING////////////
-const MOCK_API_ENDPOINT = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/39469/MOCK_DATA.json';
+// const MOCK_API_ENDPOINT = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/39469/MOCK_DATA.json';
 
-const asyncGet = new Promise( (resolve, reject) => {
+// const asyncGet = new Promise( (resolve, reject) => {
 
-  $.get( MOCK_API_ENDPOINT, (events) => {
+//   $.get( MOCK_API_ENDPOINT, (events) => {
 
-		resolve();
-  });  
-});
+// 		resolve();
+//   });  
+// });
 
-asyncGet.then(function(){
-	setMapState
-}) 
+// asyncGet.then(function(){
+// 	setMapState
+// }) 
 ///////TESTING////////////
 
