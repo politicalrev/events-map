@@ -121,19 +121,19 @@ var initMap = function initMap(google) {
 };
 
 var setMapState = async function setMapState(map, boundsObj, events) {
-	var latLngArray = [];
-
 	var _iteratorNormalCompletion = true;
 	var _didIteratorError = false;
 	var _iteratorError = undefined;
 
 	try {
+
 		for (var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 			var event = _step.value;
 
 			var latLng = new google.maps.LatLng(event.lat * 1, event.long * 1);
 
 			placeMarker(map, latLng);
+			// await placeMarker(map, latLng);
 			boundsObj.extend(latLng);
 		}
 	} catch (err) {

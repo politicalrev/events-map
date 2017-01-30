@@ -45,12 +45,12 @@ const initMap = (google) => {
 };
 
 const setMapState = async (map, boundsObj, events) => {
-	const latLngArray = []
 
 	for(let event of events){
 		let latLng = new google.maps.LatLng(event.lat*1, event.long*1);
 
 		placeMarker(map, latLng);
+		// await placeMarker(map, latLng);
 		boundsObj.extend(latLng);
 	}
 
@@ -73,7 +73,7 @@ const updateBounds = (boundsObj, event) => {
 	
 };
 
-const placeMarker = function(map, event) {
+const placeMarker = (map, event) => {
 	let latLng = new google.maps.LatLng(event.lat*1, event.long*1);
 
 
