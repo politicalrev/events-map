@@ -27,7 +27,7 @@ define( 'PLUGIN_DIR', dirname(__FILE__) . '/' );
 /**
  * Include the Admin Functionality
  */
-include( PLUGIN_DIR . 'wp-admin/index.php');
+include( PLUGIN_DIR . 'admin/index.php');
 
 /**
  * Include Front End Components

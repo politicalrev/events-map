@@ -18,3 +18,4 @@ define( 'WPADMIN_DIR', dirname(__FILE__) . '/' );
 include( WPADMIN_DIR . 'events-define-post-type.php');
 include( WPADMIN_DIR . 'events-meta-box.php');
 include( WPADMIN_DIR . 'events-options.php');
+include( WPADMIN_DIR . 'events-rest-customizations.php');
